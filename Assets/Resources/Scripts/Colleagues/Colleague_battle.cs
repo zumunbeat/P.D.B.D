@@ -26,6 +26,6 @@ public class Colleague_battle : BaseCharacter
 
     public override void ActivateSkillButtons()
     {
-        throw new System.NotImplementedException();
+        ColleaguesButtonParent.SetActive(true);
     }
 }

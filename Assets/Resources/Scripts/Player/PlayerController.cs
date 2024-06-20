@@ -1,19 +1,26 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private BattleManager battlemanager;
     public int jumpPower;
     public Transform attackTransform;
     private int moveSpeed;
     public float attackRadius;
     public int attackPower;
+    public float attackReload;
     Animator animator;
     Rigidbody2D rigid;
     SpriteRenderer sprite;
     Transform trans;
     public Image img;
-    void Start()
+    float nextAttackTime;
+    RaycastHit2D playerattack;
+
+   void Start()
     {
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
@@ -22,6 +29,8 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 2;
         attackRadius = 0.5f;
         attackPower = 2;
+        attackReload = 0.2f;
+        Physics2D.Raycast(rigid.position, Vector2.down, 0.5f, LayerMask.GetMask("enemy"));
     }
 
     void Update()
@@ -44,15 +53,10 @@ public class PlayerController : MonoBehaviour
         {
             Landing();
         }
-        /**
-        if (Input.GetMouseButtonDown(0))
+        if (playerattack.collider != null)
         {
-            if (Time.time >= nextAttackTime)
-            {
-                Attack();
-            }
+            SceneManager.LoadScene("Battle");
         }
-        **/
     }
     void Move()
     {
@@ -84,8 +88,10 @@ public class PlayerController : MonoBehaviour
     void Landing()
     {
         RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector2.down, 1f, LayerMask.GetMask("ground"));
+        
+        
         Debug.DrawRay(rigid.position, Vector2.down, Color.red);
-
+       
         if (rayHit.collider != null)
         {
             if (rayHit.distance <= 1f)
@@ -93,40 +99,14 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isJump", false);
             }
         }
+        
     }
-    
-    void Attack()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        animator.SetTrigger("onAttack");
-
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackTransform.position, attackRadius, LayerMask.GetMask("Monster"));
-
-        if (enemies != null)
+        if (collision.gameObject.tag == "enemy")
         {
-            foreach (Collider2D enemy in enemies)
-            {
-                //enemy.GetComponent<MonsterController>().TakeDamage(attackPower);
-            }
-
-            //nextAttackTime = Time.time + attackReload;
+            SceneManager.LoadScene("Battle");
         }
     }
-    /**
-    public override void TakeDamage(int damage)
-    {
-        if (animator.GetBool("isDeath"))
-            return;
-
-        base.TakeDamage(damage);
-        img.fillAmount = health / maxHealth;
-
-        animator.SetTrigger("onHit");
-    }
-    public override void Die()
-    {
-        animator.SetBool("isDeath", true);
-        this.enabled = false;
-        GameManager.instance.GameOver(false);
-    }
-    **/
+    
 }

@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 235209968}
   - component: {fileID: 235209967}
   m_Layer: 0
-  m_Name: '@Manager'
+  m_Name: BattleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,10 +339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   costUI: {fileID: 450037003}
-  player: {fileID: 895829207}
-  colleagues:
-  - {fileID: 2091380401}
-  enemies: {fileID: 566222225}
+  executeButton: {fileID: 2132572089}
+  TargetButtonParent: {fileID: 671029930}
 --- !u!4 &235209968
 Transform:
   m_ObjectHideFlags: 0
@@ -760,7 +758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -62, y: -490}
+  m_AnchoredPosition: {x: 354, y: -490}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &528905633
@@ -779,7 +777,6 @@ MonoBehaviour:
   self: {fileID: 2091380401}
   index: 2
   SkillButtonParent: {fileID: 908747126}
-  TargetButtonParent: {fileID: 671029930}
 --- !u!114 &528905634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1870,7 +1867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -502, y: -490}
+  m_AnchoredPosition: {x: -59, y: -490}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1184340120
@@ -1889,7 +1886,6 @@ MonoBehaviour:
   self: {fileID: 2091380401}
   index: 1
   SkillButtonParent: {fileID: 908747126}
-  TargetButtonParent: {fileID: 671029930}
 --- !u!114 &1184340121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2028,7 +2024,6 @@ MonoBehaviour:
   self: {fileID: 895829207}
   index: 2
   SkillButtonParent: {fileID: 87853890}
-  TargetButtonParent: {fileID: 671029930}
 --- !u!114 &1219730958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2214,6 +2209,10 @@ MonoBehaviour:
   enemystat:
     health: 0
     strength: 0
+  battlemanager: {fileID: 235209967}
+  player: {fileID: 895829207}
+  colleagues:
+  - {fileID: 2091380401}
 --- !u!1 &1362496855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,7 +2250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 354, y: -490}
+  m_AnchoredPosition: {x: -503, y: -490}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1362496857
@@ -2270,7 +2269,6 @@ MonoBehaviour:
   self: {fileID: 2091380401}
   index: 0
   SkillButtonParent: {fileID: 908747126}
-  TargetButtonParent: {fileID: 671029930}
 --- !u!114 &1362496858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2455,7 +2453,6 @@ MonoBehaviour:
   self: {fileID: 895829207}
   index: 1
   SkillButtonParent: {fileID: 87853890}
-  TargetButtonParent: {fileID: 671029930}
 --- !u!114 &1711297939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,6 +2638,10 @@ MonoBehaviour:
   enemystat:
     health: 0
     strength: 0
+  battlemanager: {fileID: 235209967}
+  player: {fileID: 895829207}
+  colleagues:
+  - {fileID: 2091380401}
 --- !u!1 &1779507910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,7 +2914,6 @@ MonoBehaviour:
   self: {fileID: 895829207}
   index: 0
   SkillButtonParent: {fileID: 87853890}
-  TargetButtonParent: {fileID: 671029930}
 --- !u!1 &1859214763
 GameObject:
   m_ObjectHideFlags: 0
@@ -3796,6 +3796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3268c3f28a082c48a45818e85d98ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleManager: {fileID: 235209967}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
