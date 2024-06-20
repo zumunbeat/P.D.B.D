@@ -1,0 +1,16 @@
+{
+    "skills": [
+      {
+        "name": "Attack",
+        "power": 8,
+        "cost": 0,
+        "target" : 1
+      },
+      {
+        "name": "Heal",
+        "power": 5,
+        "cost": 0,
+        "target" : 1
+      },
+    ]
+}
