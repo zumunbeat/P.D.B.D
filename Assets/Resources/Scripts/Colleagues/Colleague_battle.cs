@@ -18,9 +18,10 @@ public class Colleague_battle : BaseCharacter
         return JsonManager.LoadJson<T>(path);
     }
 
-    public override void UseSkill(Skill skill)
+    public override void UseSkill(Skill skill, BaseCharacter target)
     {
-        Debug.Log("Colleague used skill: " + skill.name);
+        Debug.Log("Colleague used skill: " + skill.name+" to "+target.name);
+
         // 스킬 사용 로직
     }
 

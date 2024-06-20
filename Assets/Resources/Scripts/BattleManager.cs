@@ -109,8 +109,9 @@ public class BattleManager : MonoBehaviour
                     {
                         enemy.EnemyAI();
                     }
-                    ExecuteSelectedSkills();
                     isStateInitialized = true;
+                    ExecuteSelectedSkills();
+                    
                 }
                 break;
 
@@ -129,7 +130,6 @@ public class BattleManager : MonoBehaviour
         selectedSkill = skill;
         selectCharacter = self;
         costUI.SetCost(costUI.GetCost() - skill.cost);
-        Debug.Log("Selected skill: " + skill.name);
         // 스킬 선택 후 바로 타겟 선택 메서드 호출
         StartTargetSelection(true);
     }
@@ -139,7 +139,7 @@ public class BattleManager : MonoBehaviour
         if (selectedSkill != null&&selectCharacter != null)
         {
             selectedSkills.Add(new SelectedSkill(selectCharacter,selectedSkill, target));
-            Debug.Log("Selected target: " + target.gameObject.name);
+            
             selectedSkill = null;
             selectCharacter = null;
             switchstate();
@@ -155,8 +155,8 @@ public class BattleManager : MonoBehaviour
     {
         foreach (SelectedSkill selectedSkill in selectedSkills)
         {
-            Debug.Log(selectedSkill.skill.name);
-            selectedSkill.self.UseSkill(selectedSkill.skill);
+            
+            selectedSkill.self.UseSkill(selectedSkill.skill,selectedSkill.target);
         }
         selectedSkills.Clear(); // 선택된 스킬 목록 초기화
         switchstate();
@@ -171,8 +171,6 @@ public class BattleManager : MonoBehaviour
     {
         if (Isremain == true)
         {
-            // 타겟 선택 UI를 활성화하거나, 다음 단계로 진행하는 등의 로직 추가
-            Debug.Log("Select target for skill: " + selectedSkill.name);
             TargetButtonParent.SetActive(true);
         }
         else

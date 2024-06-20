@@ -41,16 +41,16 @@ public class Enemy_battle : BaseCharacter
         battlemanager.SelectSkill(ThisTurnEnemyDecision(this), this);
         battlemanager.SelectTarget(Randomtarget());
     }
-    public override void UseSkill(Skill skill)
+    public override void UseSkill(Skill skill, BaseCharacter target)
     {
-        Debug.Log("Enemy used skill: " + skill.name);
+        Debug.Log("Enemy used skill: " + skill.name+ " to " +target.name);
         // 스킬 사용 로직
     }
     public Skill ThisTurnEnemyDecision(Enemy_battle obj)
     {
         //랜덤한 적의 스킬을 선택해서 해당정보를 넘겨주자.
         int decision = UnityEngine.Random.Range(0, obj.GetLength());
-        Debug.Log(obj.GetSkill(decision).name);
+        
         return obj.GetSkill(decision);
     }
     public BaseCharacter Randomtarget()

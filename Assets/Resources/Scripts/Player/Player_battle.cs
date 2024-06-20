@@ -1,5 +1,6 @@
 using UnityEngine;
 using static Interface;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player_battle : BaseCharacter
 {
@@ -32,10 +33,11 @@ public class Player_battle : BaseCharacter
         JsonManager.SaveJson(data, path);
     }
 
-    public override void UseSkill(Skill skill)
+    public override void UseSkill(Skill skill, BaseCharacter target)
     {
-        Debug.Log("Player used skill: " + skill.name);
-        // 스킬 사용 로직
+        Debug.Log("Player used skill: " + skill.name + " to " + target.name);
+        Debug.Log("target's hp : " + target.gethp() + " - " + skill.power);
+
     }
 
     public override void ActivateSkillButtons()
