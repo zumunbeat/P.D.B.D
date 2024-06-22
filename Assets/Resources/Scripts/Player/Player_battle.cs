@@ -36,7 +36,6 @@ public class Player_battle : BaseCharacter
     public override void UseSkill(Skill skill, BaseCharacter target)
     {
         Debug.Log("Player used skill: " + skill.name + " to " + target.name);
-        Debug.Log("target's hp : " + target.gethp() + " - " + skill.power);
 
     }
 

@@ -20,7 +20,8 @@ public enum BattleState
     PlayerTurn,
     ColleagueTurn,
     Execute,
-    EnemyTurn
+    EnemyTurn,
+    ResetTurn,
 }
 
 public class BattleManager : MonoBehaviour
@@ -77,8 +78,10 @@ public class BattleManager : MonoBehaviour
         switch (state)
         {
             case BattleState.PlayerTurn:
+                Debug.Log("PlayerTurn");
                 if (!isStateInitialized)
                 {
+                    
                     RoleDice();
                     player.ActivateSkillButtons();
                     isStateInitialized = true;
@@ -87,13 +90,14 @@ public class BattleManager : MonoBehaviour
             case BattleState.ColleagueTurn:
                 if (!isStateInitialized)
                 {
-                    foreach(Colleague_battle colleague in colleagues)
+                    Debug.Log("ColleagueTurn");
+                    foreach (Colleague_battle colleague in colleagues)
                     {
                         colleague.ActivateSkillButtons();
                     }
                     isStateInitialized = true;
                 }
-                
+
                 break;
             case BattleState.Execute:
                 if (!isStateInitialized)
@@ -105,17 +109,15 @@ public class BattleManager : MonoBehaviour
             case BattleState.EnemyTurn:
                 if (!isStateInitialized)
                 {
-                    foreach(Enemy_battle enemy in enemies)
+                    Debug.Log("EnemyTurn");
+                    foreach (Enemy_battle enemy in enemies)
                     {
                         enemy.EnemyAI();
                     }
                     isStateInitialized = true;
                     ExecuteSelectedSkills();
-                    
                 }
                 break;
-
-
         }
 
     }
@@ -196,6 +198,7 @@ public class BattleManager : MonoBehaviour
     {
         if (isActiveAndEnabled != true) return;
         // 다음 상태로 전환
+        isStateInitialized = false;
         switch (state)
         {
             case BattleState.PlayerTurn:
@@ -210,8 +213,9 @@ public class BattleManager : MonoBehaviour
             case BattleState.EnemyTurn:
                 state = BattleState.PlayerTurn;
                 break;
-        }
-        isStateInitialized = false; // 상태가 변경되었음을 표시
+            
+        } // 상태가 변경되었음을 표시
+        Debug.Log("상태전환");
     }
     public BaseCharacter getplayer()
     {
